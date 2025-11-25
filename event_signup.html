@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Signup</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <h1>Event Signup</h1>
+  <form id="signup-form">
+    <center><h2>Event name</h2></center>
+    <textarea name="Event Name" id="eventName" class="textBox"></textarea>
+    <span id="event-name-error-message" class="error-message"></span>
+
+    <center><h2>Company Representative Name</h2></center>
+    <textarea name="Company Representative Name" id="companyRepresentativeName" class="textBox"></textarea>
+    <span id="representative-name-error-message" class="error-message"></span>
+
+    <center><h2>Representative Email</h2></center>
+    <input type="email" id="repEmail">
+    <span id="email-error-message" class="error-message"></span>
+
+    <center><h2>Company Role</h2></center>
+    <select name="companyRole" id="companyRole">
+      <option value="Event Coordinator/Organizer">Event Coordinator/Organizer</option>
+      <option value="Marketing/Brand Manager">Marketing/Brand Manager</option>
+      <option value="Sales/Business Development Representative">Sales/Business Development Representative</option>
+      <option value="HR Representative">HR Representative</option>
+      <option value="Participant">Participant</option>
+      <option value="Sponsor">Sponsor</option>
+    </select>
+
+    <span id="submission-existence-error-message" class="error-message"></span>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <section id="signup-display">
+    <h2>Event Signup Tracker</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Event Name</th>
+          <th>Representative Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="signup-table-body"></tbody>
+    </table>
+  </section>
+  
+  <section id="role-summary">
+    <h2>Upcoming Events Summary</h2>
+    <ul id="summary-list"></ul>
+  </section>  
+
+  <script src="event_signup.js"></script>
+</body>
+</html>
