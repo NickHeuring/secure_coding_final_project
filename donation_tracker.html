@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donation Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="shared-header"></div>
+  <main>
+    <h1>Donation Tracker</h1>
+
+    <form id="donation-form">
+      <input type="text" id="donorName" placeholder="Enter your name" required />
+      <input type="text" id="charityName" placeholder="Enter the charity name" required />
+      <input type="number" id="donationAmount" placeholder="Enter the amount" required />
+      <input type="date" id="donationDate" required />
+      <input type="text" id="donorComment" placeholder="What is the message?" />
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="form-feedback" class="error-message"></div>
+
+    <table id="donation-table">
+      <thead>
+        <tr>
+          <th>Donor Name</th>
+          <th>Charity Name</th>
+          <th>Donation Amount</th>
+          <th>Date of Donation</th>
+          <th>Donor's Comment</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Donation rows inserted here -->
+      </tbody>
+    </table>
+
+    <!-- Styled container for the donation total -->
+    <div id="donation-total-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Total Donations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="donation-total">$0.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+  <script src="donation_tracker.js"></script>
+</body>
+</html>
