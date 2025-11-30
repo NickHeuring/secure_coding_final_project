@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  lint:
+    name: Run Linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Super-Linter
+      - name: Run Super-Linter
+        uses: github/super-linter@v6
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_PYTHON: true
+          VALIDATE_TYPESCRIPT: true
+          VALIDATE_JAVA: true
+        continue-on-error: true
+
+      # Setup Python for Black
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Black
+        run: |
+          python -m pip install --upgrade pip
+          pip install black
+
+      # Run Black
+      - name: Run Black
+        run: |
+          black --check . > black-results.txt || true
+
+      # Upload Super-Linter results
+      - name: Upload Super-Linter Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: super-linter-results
+          path: /tmp/linter-reports  
+
+      # Upload Black results
+      - name: Upload Black Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: black-results
+          path: black-results.txt
