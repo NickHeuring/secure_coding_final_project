@@ -1,41 +1,34 @@
-name: CI
+---
+name: Lint
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  security-events: write
+    branches: [master]
+  
+permissions: {}
 
 jobs:
-  lint:
-    name: Run Linters
+  build:
+    name: Lint
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Super-Linter
-      - name: Run Super-Linter
-        uses: github/super-linter@v6
-        env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_ALL_CODEBASE: true
-          VALIDATE_PYTHON: true
-          VALIDATE_TYPESCRIPT: true
-          VALIDATE_JAVA: true
-        continue-on-error: true
-
-
-      # Upload Super-Linter results
-      - name: Upload Super-Linter Results
-        uses: actions/upload-artifact@v4
+      - name: Checkout code
+        uses: actions/checkout@v5
         with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Super-linter
+        uses: super-linter/super-linter@502f4fe48a81a392756e173e39a861f8c8efe056
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           name: super-linter-results
           path: linter/linter-report
