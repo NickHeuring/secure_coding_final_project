@@ -62,7 +62,7 @@ function saveToDonationTable(donations) {
         row.append(amountCell);
 
         const dateCell = document.createElement("td");
-		dateCell.innerHTML = donation.donationDate;
+		dateCell.textContent = donation.donationDate;
         row.append(dateCell);
 
         const commentCell = document.createElement("td");

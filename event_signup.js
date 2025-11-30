@@ -24,13 +24,20 @@ form.addEventListener("submit", (event) => {
 
         existenceCheck = localStorage.getItem(repEmail.value)
         if (!existenceCheck){
+
+            const regex = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+
+            if(regex.test(repEmail.value)) {
+                return false
+            } else {
             localStorage.setItem(repEmail.value, JSON.stringify(formData));
             console.log("Form data saved to localStorage:", formData);
             form.submit()
+            }
         } else {
             const previouSubmission = document.getElementById("submission-existence-error-message")
             console.error("A form submission associated with this email address already exists.")
-            previouSubmission.innerHTML = 
+            previouSubmission.textContentL = 
                 "A submission already exists for " + repEmail.value + ". Try again.";
 
             console.warn("Duplicate submission found");
