@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSummary();
 });
 
+
 form.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -138,4 +139,5 @@ function updateSummary() {
         listItem.textContent = `${role}: ${count}`;
         summaryList.appendChild(listItem); 
     }
+    
 }
